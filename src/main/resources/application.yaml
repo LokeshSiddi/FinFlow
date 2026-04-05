@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: finflow
+
+  # H2 Database Configuration
+  datasource:
+    url: jdbc:h2:mem:finflowdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+
+  # Enable the Web Console for H2 Database
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  # JPA / Hibernate Configuration
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update # Automatically creates/updates tables based on entities
+    show-sql: true # Prints SQL queries in the console (Great for Debugging)
+    properties:
+      hibernate:
+        format_sql: true
+
+# Custom JWT Properties
+application:
+  security:
+    jwt:
+      # This is a Base64 encoded key.
+      secret-key: ${secret-key:}
+      expiration: 86400000 # 24 hour in milliseconds
