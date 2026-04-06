@@ -5,6 +5,7 @@ import com.lokesh.finflow.dto.request.RegisterRequest;
 import com.lokesh.finflow.dto.response.AuthenticationResponse;
 import com.lokesh.finflow.model.User;
 import com.lokesh.finflow.model.UserPrincipal;
+import com.lokesh.finflow.model.UserRole;
 import com.lokesh.finflow.model.UserStatus;
 import com.lokesh.finflow.repository.UserRepository;
 import com.lokesh.finflow.security.JwtService;
@@ -29,9 +30,10 @@ public class AuthService {
         }
 
         User user = User.builder()
+                .name(request.name())
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
-                .role(request.role())
+                .role(UserRole.VIEWER)
                 .status(UserStatus.ACTIVE)
                 .build();
 
@@ -40,7 +42,7 @@ public class AuthService {
         UserPrincipal userPrincipal = new UserPrincipal(user);
         String jwtToken = jwtService.generateToken(userPrincipal, user.getRole().name());
 
-        return new AuthenticationResponse(jwtToken, user.getEmail(), user.getRole().name());
+        return new AuthenticationResponse(jwtToken, user.getName(), user.getEmail(), user.getRole().name());
     }
 
     public AuthenticationResponse login(AuthenticationRequest request) {
@@ -54,6 +56,6 @@ public class AuthService {
         UserPrincipal userPrincipal = new UserPrincipal(user);
         String jwtToken = jwtService.generateToken(userPrincipal, user.getRole().name());
 
-        return new AuthenticationResponse(jwtToken, user.getEmail(), user.getRole().name());
+        return new AuthenticationResponse(jwtToken, user.getName(), user.getEmail(), user.getRole().name());
     }
 }

@@ -11,10 +11,11 @@ public record RegisterRequest(
    @Email(message = "Invalid email format")
    String email,
 
+   @NotBlank(message = "Name is required")
+   String name,
+
    @NotBlank(message = "Password is required")
    @Size(min = 6, message = "Password must be at least 6 characters long")
-   String password,
+   String password
 
-   @NotNull(message = "Role is required")
-   UserRole role
 ) {}

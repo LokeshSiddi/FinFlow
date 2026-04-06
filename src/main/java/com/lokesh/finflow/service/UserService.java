@@ -36,6 +36,7 @@ public class UserService {
         return new UserResponse(
                 user.getId(),
                 user.getEmail(),
+                user.getName(),
                 user.getRole(),
                 user.getStatus()
         );

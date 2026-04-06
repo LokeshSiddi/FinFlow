@@ -18,6 +18,11 @@ spring:
       enabled: true
       path: /h2-console
 
+  # Sql Test Data Initialization
+  sql:
+    init:
+        mode: always # Always initialize the database with schema.sql and data.sql
+
   # JPA / Hibernate Configuration
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
@@ -27,6 +32,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    defer-datasource-initialization: true # Ensures that the datasource is initialized before JPA tries to create tables
 
 # Custom JWT Properties
 application:

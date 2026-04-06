@@ -38,6 +38,6 @@ public interface FinancialRecordRepository extends JpaRepository<FinancialRecord
     BigDecimal sumAmountByTypeAndDateRange(@Param("type") RecordType type, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
     // Grouping totals by category (e.g., total spent on "Software Subscription" this month)
-    @Query("SELECT fr.category, SUM(fr.amount) FROM FinancialRecord fr WHERE fr.type = :type GROUP BY fr.category")
+    @Query("SELECT new com.lokesh.finflow.dto.repository.CategoryTotal(fr.category, SUM(fr.amount)) FROM FinancialRecord fr WHERE fr.type = :type GROUP BY fr.category")
     List<CategoryTotal> sumAmountByTypeGroupedByCategory(@Param("type") RecordType type);
 }

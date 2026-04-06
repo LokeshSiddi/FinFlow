@@ -28,12 +28,14 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable()) // Disable CSRF for stateless APIs
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll() // Allow unauthenticated access to auth endpoints
+                .requestMatchers("/api/auth/**", "/error", "/h2-console/**").permitAll() // Allow unauthenticated access to auth endpoints
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() // Allow unauthenticated access to Swagger docs
                 .anyRequest().authenticated() // Require authentication for all other endpoints
             )
             .authenticationProvider(authenticationProvider) // Use our custom authentication provider
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter before the username/password filter
+
+        http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin())); // Allow H2 console to be rendered in your browser
 
         return http.build();
     }
