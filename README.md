@@ -1,6 +1,9 @@
 # FinFlow: Finance Dashboard Backend
 
-A robust, monolithic Spring Boot backend API designed to power a financial dashboard system. This application manages user roles, processes financial records, and delivers aggregated analytics with strict Role-Based Access Control (RBAC) and high-performance database-level calculations.
+> 🎥 [Click Here to Watch a 2-Minute Setup & Demo Video](https://youtu.be/Evb_TI4yKYc)
+
+**A robust, monolithic Spring Boot backend API designed to power a financial dashboard system. This application manages user roles, processes financial records, and delivers aggregated analytics with strict Role-Based Access Control (RBAC) and high-performance database-level calculations.
+
 
 ## 🚀 Tech Stack
 * **Language/Framework:** Java 21, Spring Boot 3.x
@@ -34,6 +37,9 @@ For security best practices, the JWT Secret Key is managed via system environmen
 
 **Variable Name:** `secret-key`
 **Value:** `dGhpcyBpcyBhIHRvcCBzZWNyZXQga2V5IGRvIGxlYWs`
+
+*(This is a Base64-encoded string that decodes to "this is a top secret key do leak", which is sufficient for testing purposes. You can use this default value or generate your own secure key for production use.)*
+
 *(Note: If you choose to use your own key, it must be a Base64 string that decodes to at least 256 bits/32 bytes to satisfy the HMAC-SHA algorithm requirements).*
 
 **How to set it in the terminal:**
